@@ -48,7 +48,11 @@ $this->title = 'Авторизация';
                 'placeholder'=>'Логин',
             ]])->textInput(['autofocus' => true]) ?>
 
-        <?php echo('<div class="form-group nodisp field-loginform-rememberme">
+        <?= $form->field($model, 'password' ,[
+            'inputOptions' => [
+                'placeholder'=>'Пароль',
+            ]])->passwordInput() ?>
+             <?php echo('<div class="form-group nodisp field-loginform-rememberme">
 <div class="col-lg-offset-1 col-lg-3"><input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" name="LoginForm[rememberMe]" value="1" > <label for="loginform-rememberme">Remember Me</label></div>
 <div class="col-lg-8"><p class="help-block help-block-error "></p></div>
 </div>') ?>
