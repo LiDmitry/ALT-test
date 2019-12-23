@@ -52,13 +52,13 @@ $this->title = 'Авторизация';
             'inputOptions' => [
                 'placeholder'=>'Пароль',
             ]])->passwordInput() ?>
-             <?= $form->field($model, 'rememberMe')->checkbox([
-        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                 'inputOptions' => [
+             <?= $form->field($model, 'rememberMe' ,['inputOptions' => [
                      'id' => '123123123',
                      'class'=>'aaaaaaa'
 
-                 ]
+                 ]] )->checkbox([
+        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+
     ]) ?>
 
 
