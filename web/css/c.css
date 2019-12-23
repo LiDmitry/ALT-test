@@ -1,0 +1,34 @@
+#map{
+    height:470px;
+
+}
+.coordinate{list-style-type: none;width: 513px;}
+input{
+    width: 100px;}
+ul{padding:0px;}
+
+.coordid{display: none;}
+.todelete{display: none;}
+.green{background-color: #caffb6
+}
+.savebtn{
+    display: none;}
+.coordbutton:hover{border:2px solid #0bb308;}
+.coordbutton{ width:64px;}
+.addForm{display: flex;}
+label{display: none;}
+.addinput{margin-right: 4px;}
+.addButton{width: 199px;}
+.logout:hover{border:2px solid #0bb308;}
+.logout{background-color: #e61400;
+    color: white;font-size: 13px;}
+
+.top-panel{background-color: #e61400;}
+.attrName{display: flex;}
+.attr{width: 104px;}
+
+.loginbtn{width:inherit; background-color: #e61400;color: white;border: none;
+}
+.signupbtn{width:300px; background-color: #e61400;color: white !important; text-align: center; padding:3px 108px 3px 108px;text-decoration: none !important; }
+.nodisp{display: none;}
+.navbar-inverse .navbar-nav > .active > a{background-color: #e61400 }
