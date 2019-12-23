@@ -71,7 +71,7 @@ class SiteController extends Controller
 
         if (!Yii::$app->user->isGuest) {
    print_r($_POST);
-        $deletedID = $_POST['id'];
+
         $todelete = $_POST['todelete'];
         $coordname = $_POST['coordname'];
         $width = $_POST['width'];
