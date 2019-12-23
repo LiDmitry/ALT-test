@@ -73,8 +73,8 @@ $query;
                <input name = "coordname" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->coordname.'" class="coordname togray">
                 <input name = "hight" id="3'.$coordinate->id.'"pattern="^[+-]?[0-9]{1,2}\.[0-9]{1,3}" readonly type="text" value="'.$coordinate->hight.'" class="hight togray">
                 <input name = "width" id="2'.$coordinate->id.'" pattern="^[+-]?[0-9]{1,3}\.[0-9]{1,3}" readonly class="width  togray" type="text" value="'.$coordinate->width.'" >
-                <button class= "coordbutton del" name="addCoord" type="submit">&#128465;</button>
-                <button id="4'.$coordinate->id.'" class= "coordbutton coord " type="button">&#9998;</button>
+                <button class= "coordbutton" name="addCoord" type="submit">&#128465;</button>
+                <button id="4'.$coordinate->id.'" class= "coordbutton" type="button">&#9998;</button>
                 <button id="8'.$coordinate->id.'" class= "savebtn coordbutton" name="addCoord" type="submit">&#10004;</button>
                 <button id="7'.$coordinate->id.'" class= "coordbutton" name="Changeposition" type="button">&#128269;</button></form></li>'); }?>
 
@@ -162,14 +162,10 @@ if($coordinate->username== Yii::$app->user->identity->username){echo('<script>
    var todel=document.getElementById(5'.$coordinate->id.');
     var coordname=document.getElementById(1'.$coordinate->id.');
     var width=document.getElementById(2'.$coordinate->id.');
-    var del = document.getElementsByClassName("del");
-    var coord=document.getElementsByClassName("coord");
    
     var hight=document.getElementById(3'.$coordinate->id.');
      var elements = document.getElementsByClassName("togray");
      $(elements).prop(\'readonly\', true);
-     $(del).addClass(\'nodisp\');
-     $(coord).addClass(\'nodisp\');
      $(elements).removeClass(\'green\');
       $(save).removeClass(\'savebtn\');
       $(todel).val(\'0\');
