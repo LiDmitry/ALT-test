@@ -114,7 +114,7 @@ class SiteController extends Controller
 
 
 
-    print_r($_POST);
+              print_r($_POST);
             $deletedID=$_POST['id'];
             $todelete=$_POST['todelete'];
             $coordname=$_POST['coordname'];
