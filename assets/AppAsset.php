@@ -31,7 +31,7 @@ class AppAsset extends AssetBundle
 
         'http://code.jquery.com/jquery-1.8.3.js',
 
-
+        'js/remove.js',
         'js/jquery.maskedinput.js'
 
 
