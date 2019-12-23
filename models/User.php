@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\helpers\Security;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
@@ -49,10 +49,26 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->id;
     }
 
+    public function generateAuthKey()
+    {
+        $this->auth_key = Security::generateRandomKey();
+    }
     /**
      * {@inheritdoc}
      */
-  
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
+
     /**
      * Validates password
      *
