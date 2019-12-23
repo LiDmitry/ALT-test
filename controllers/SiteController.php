@@ -70,12 +70,65 @@ class SiteController extends Controller
 
 
         if (!Yii::$app->user->isGuest) {
+            if($_POST==null){
 
 
 
 
 
 
+
+
+
+                $query = coordinates::find();
+                $coordmodel = new AddCoordinatesForm();
+                if($coordmodel->load(\Yii::$app->request->post()) && $coordmodel->validate()) {
+
+
+                    $coordinate = new coordinates();
+                    $coordinate->username = Yii::$app->user->identity->username;
+                    $coordinate->coordname = $coordmodel->coordname;
+                    $coordinate->width = $coordmodel->width;;
+                    $coordinate->hight = $coordmodel->hight;
+
+                    $coordinate->save();
+                    $this->refresh();
+                    return $this->render('test',[
+
+                        'query' => $query,
+                        'coordmodel'=>$coordmodel,
+
+                    ]);
+
+                }
+
+                return $this->render('test',[
+
+                    'query' => $query,
+                    'coordmodel'=>$coordmodel,
+
+                ]);
+            }
+
+
+
+
+
+
+            $deletedID=$_POST['id'];
+            $todelete=$_POST['todelete'];
+            $coordname=$_POST['coordname'];
+            $width=$_POST['width'];
+            $hight=$_POST['hight'];
+            $deleted=coordinates::findOne($deletedID);
+
+            if($todelete==1){if($deleted!=null){  $deleted->delete();}}
+            if($todelete==0){if($deleted!=null){
+                $deleted->coordname=$coordname;
+                $deleted->width=$width;
+                $deleted->hight=$hight;
+                $deleted->save();
+                ;}}
 
             $query = coordinates::find();
             $coordmodel = new AddCoordinatesForm();
@@ -99,36 +152,35 @@ class SiteController extends Controller
 
             }
 
-                return $this->render('test',[
+            return $this->render('test',[
 
-                    'query' => $query,
-                    'coordmodel'=>$coordmodel,
-
-                ]);
-            }
-            $model = new LoginForm();
-            if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                $query = coordinates::find();
-                $coordmodel = new AddCoordinatesForm();
-                
-                $this->refresh();
-                return $this->render('test',[
-
-                    'query' => $query,
-                    'coordmodel'=>$coordmodel,
-
-                ]);
-            }
-
-            $model->password = '';
-            return $this->render('login', [
-                'model' => $model,
-
+                'query' => $query,
+                'coordmodel'=>$coordmodel,
 
             ]);
+        }
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $query = coordinates::find();
+            $coordmodel = new AddCoordinatesForm();
 
+            $this->refresh();
+            return $this->render('test',[
+
+                'query' => $query,
+                'coordmodel'=>$coordmodel,
+
+            ]);
         }
 
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+
+
+        ]);
+
+    }
 
 
 
