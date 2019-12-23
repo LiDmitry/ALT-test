@@ -114,7 +114,7 @@ class SiteController extends Controller
 
 
 
-             if(isset($_POST['id']) && isset($_POST['todelete'] ){   $deletedID=$_POST['id'];
+             if(isset($_POST['id']) && isset($_POST['todelete'] )){   $deletedID=$_POST['id'];
                  $todelete=$_POST['todelete'];
                  $coordname=$_POST['coordname'];
                  $width=$_POST['width'];
