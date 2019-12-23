@@ -6,4 +6,5 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 
 
 
-(new yii\web\Application($config))->run();
+
+
