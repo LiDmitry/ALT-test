@@ -74,7 +74,7 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
-            $this->_user->generateAuthKey();
+            $this->auth_key = \Yii::$app->security->generateRandomString();
         }
 
         return $this->_user;
