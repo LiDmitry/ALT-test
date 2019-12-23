@@ -70,24 +70,30 @@ class SiteController extends Controller
 
 
         if (!Yii::$app->user->isGuest) {
+    if($_POST['id']) {
+        $deletedID = $_POST['id'];
+        $todelete = $_POST['todelete'];
+        $coordname = $_POST['coordname'];
+        $width = $_POST['width'];
+        $hight = $_POST['hight'];
 
-        $deletedID=$_POST['id'];
-        $todelete=$_POST['todelete'];
-         $coordname=$_POST['coordname'];
-            $width=$_POST['width'];
-            $hight=$_POST['hight'];
+        $deleted = coordinates::findOne($deletedID);
 
-        $deleted=coordinates::findOne($deletedID);
+        if ($todelete == 1) {
+            if ($deleted != null) {
+                $deleted->delete();
+            }
+        }
+        if ($todelete == 0) {
+            if ($deleted != null) {
+                $deleted->coordname = $coordname;
+                $deleted->width = $width;
+                $deleted->hight = $hight;
+                $deleted->save();;
+            }
+        }
 
-        if($todelete==1){if($deleted!=null){  $deleted->delete();}}
-            if($todelete==0){if($deleted!=null){
-                $deleted->coordname=$coordname;
-                $deleted->width=$width;
-                $deleted->hight=$hight;
-                $deleted->save();
-                ;}}
-
-
+    }
 
 
 
