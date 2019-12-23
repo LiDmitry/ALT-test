@@ -114,21 +114,21 @@ class SiteController extends Controller
 
 
 
-              print_r($_POST);
-            $deletedID=$_POST['id'];
-            $todelete=$_POST['todelete'];
-            $coordname=$_POST['coordname'];
-            $width=$_POST['width'];
-            $hight=$_POST['hight'];
-            $deleted=coordinates::findOne($deletedID);
+             if($_POST['id'] && $_POST['todelete'] ){   $deletedID=$_POST['id'];
+                 $todelete=$_POST['todelete'];
+                 $coordname=$_POST['coordname'];
+                 $width=$_POST['width'];
+                 $hight=$_POST['hight'];
+                 $deleted=coordinates::findOne($deletedID);
 
-            if($todelete==1){if($deleted!=null){  $deleted->delete();}}
-            if($todelete==0){if($deleted!=null){
-                $deleted->coordname=$coordname;
-                $deleted->width=$width;
-                $deleted->hight=$hight;
-                $deleted->save();
-                ;}}
+                 if($todelete==1){if($deleted!=null){  $deleted->delete();}}
+                 if($todelete==0){if($deleted!=null){
+                     $deleted->coordname=$coordname;
+                     $deleted->width=$width;
+                     $deleted->hight=$hight;
+                     $deleted->save();
+                     ;}}}
+
 
             $query = coordinates::find();
             $coordmodel = new AddCoordinatesForm();
