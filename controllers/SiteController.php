@@ -70,6 +70,7 @@ class SiteController extends Controller
 
 
         if (!Yii::$app->user->isGuest) {
+
         $deletedID=$_POST['id'];
         $todelete=$_POST['todelete'];
          $coordname=$_POST['coordname'];
@@ -121,7 +122,16 @@ class SiteController extends Controller
             }
             $model = new LoginForm();
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                return $this->render('login', compact('model'));
+                $query = coordinates::find();
+                $coordmodel = new AddCoordinatesForm();
+                
+                $this->refresh();
+                return $this->render('test',[
+
+                    'query' => $query,
+                    'coordmodel'=>$coordmodel,
+
+                ]);
             }
 
             $model->password = '';
@@ -141,7 +151,7 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $query = coordinates::find();
+
         $model = new SignupForm();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
             $user = new User();

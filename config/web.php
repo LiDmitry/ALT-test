@@ -17,6 +17,7 @@ $config = [
             'cookieValidationKey' => '1111',
             'enableCsrfValidation'=>false,
 
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
