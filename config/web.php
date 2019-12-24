@@ -54,6 +54,7 @@ $config = [
             'rules' => [
                 'login'=>'site/login',
                 'signup'=>'site/signup',
+                ''=>'site/index',
             ],
         ],
 
