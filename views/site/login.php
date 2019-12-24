@@ -40,7 +40,7 @@ $this->title = 'Авторизация';
             'labelOptions' => ['class' => 'col-lg-1 control-label'],
 
         ],
-        'action'=>'site/index'
+        'action'=>''
     ]); ?>
 
         <?= $form->field($model, 'username' ,[
