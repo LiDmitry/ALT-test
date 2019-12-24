@@ -65,7 +65,7 @@ $this->title = 'Авторизация';
             </div>
 
         </div>
-    <a class="signupbtn" href="index.php?r=site%2Fsignup">Зарегистрировалься</a>
+    <a class="signupbtn" href="/signup">Зарегистрировалься</a>
 
     <?php ActiveForm::end(); ?>
 
