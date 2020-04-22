@@ -52,10 +52,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
+
 
     /**
      * {@inheritdoc}
