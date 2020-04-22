@@ -4,49 +4,76 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use app\models\coordinates;
+use app\models\Coating;
+use app\models\Kreplenie;
 
-
+$activeuser=Yii::$app->user->identity->companyname;
 $query;
+$query3;
 ?>
-
+<div><h1><?php echo($activeuser); ?></h1></div>
 <div class="col-md-6">
-    <div class="attrName">
-        <div class="attr"><span >Имя</span></div>
-        <div class="attr"><span >Высота</span></div>
-        <div class="attr"><span >Широта</span></div>
-    </div>
+    <h3>Покрытия</h3>
+
+
 <?php $form = ActiveForm::begin([
+
 
     'options' => ['class' => 'addForm'],
 ]) ?>
-<?= $form->field($coordmodel , 'coordname', [
-    'inputOptions' => [
-        'class' => 'coordname addinput',
+    <div class="parts">
+    <?= $form->field($coatingmodel , 'name', [
+        'inputOptions' => [
+            'class' => 'coordname addinput',
+            'placeholder' =>'Наименование',
 
-    ]] ) ?>
-    <?= $form->field($coordmodel , 'hight', [
+        ]] ) ?>
+    <?= $form->field($coatingmodel , 'price', [
         'inputOptions' => [
             'class' => 'hight addinput',
-            'pattern'=>'^[+-]?[0-9]{1,2}\.[0-9]{1,3}',
-            'placeholder'=>'(+/-)XX.XXX',
+            'placeholder' =>'Цена',
+
         ]] ) ?>
-    <?= $form->field($coordmodel , 'width', [
+    </div>
+    <div class="parts">
+    <?= $form->field($coatingmodel , 'lenght', [
         'inputOptions' => [
             'class' => 'width addinput',
+            'placeholder' =>'Длина',
 
-            'pattern'=>'^[+-]?[0-9]{1,3}\.[0-9]{1,3}',
-            'placeholder'=>'(+/-)XXX.XXX',
+
+
         ]] ) ?>
+    <?= $form->field($coatingmodel , 'width', [
+        'inputOptions' => [
+            'class' => 'width addinput',
+            'placeholder' =>'Ширина'
 
 
-<div class="form-group">
-    <div>
-        <?= Html::submitButton('Добавить', ['class' => 'coordbutton addButton','name'=>'addCoord']) ?>
+
+        ]] ) ?>
+    </div>
+    <div class="parts">
+    <?= $form->field($coatingmodel , 'description', [
+        'inputOptions' => [
+            'class' => 'width addinput',
+            'placeholder' =>'Описание',
+
+
+
+        ]] ) ?>
+        <div>
+            <?= Html::submitButton('Добавить', ['class' => 'coordbutton addButton','name'=>'addCoord']) ?>
+        </div>
+
+
+        <?php ActiveForm::end() ?>
+
     </div>
 
-</div>
-<?php ActiveForm::end() ?>
+
+
+
 
 
 
@@ -56,141 +83,159 @@ $query;
 
     <?php
 
-    $coordinates = $query->orderBy('username')
+    $coating = $query->orderBy('name')
 
         ->all();
 
     ?>
     <ul>
         <?php
-        foreach ($coordinates as $coordinate):  ?>
 
-            <?php if($coordinate->username== Yii::$app->user->identity->username)
-            { echo('<li class="coordinate" id=/"coordinate_form_'.$coordinate->id.'/">
+        foreach ($coating as $coordinate):
+            if($coordinate->user_id==Yii::$app->user->identity->getId()){
+           echo('<li class="coordinate" id=/"coordinate_form_'.$coordinate->id.'/">
             <form action="/web/index.php" method="post" name="'.$coordinate->id.'">
             <input readonly name="id" type="text" value="'.$coordinate->id.'" class="coordid">
+            <input readonly name="coat" type="text" value="1" class="coordid">
+            
             <input  readonly  class="todelete" name="todelete" id="5'.$coordinate->id.'" type="text" value="1" class="todelete">
-               <input name = "coordname" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->coordname.'" class="coordname togray">
-                <input name = "hight" id="3'.$coordinate->id.'"pattern="^[+-]?[0-9]{1,2}\.[0-9]{1,3}" readonly type="text" value="'.$coordinate->hight.'" class="hight togray">
-                <input name = "width" id="2'.$coordinate->id.'" pattern="^[+-]?[0-9]{1,3}\.[0-9]{1,3}" readonly class="width  togray" type="text" value="'.$coordinate->width.'" >
-                <button class= "coordbutton del" name="addCoord" type="submit">&#128465;</button>
-                <button id="4'.$coordinate->id.'" class= "coordbutton coord " type="button">&#9998;</button>
-                <button id="8'.$coordinate->id.'" class= "savebtn coordbutton" name="addCoord" type="submit">&#10004;</button>
-                <button id="7'.$coordinate->id.'" class= "coordbutton" name="Changeposition" type="button">&#128269;</button></form></li>'); }?>
+            <div class="ppp">
+            Наименование:
+               <input name = "name" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->name.'" class="coordname togray"></div>
+              <div class="ppp"> Описание:
+               <input name = "description" id="2'.$coordinate->id.'" readonly class="width  togray" type="text" value="'.$coordinate->description.'" ></div>
+         
+              <div class="ppp"> Длина (мм):
+               
+               <input name = "lenght" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->lenght.'" class="coordname togray"></div>
+              <div class="ppp"> Ширина (мм):
+                <input name = "width" id="3'.$coordinate->id.'" readonly type="text" value="'.$coordinate->width.'" class="hight togray"></div>
+              <div class="ppp"> Цена за кв.м (руб):  
+                <input name = "price" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->price.'" class="coordname togray"></div>
+                <button class= "coordbutton" name="addCoord" type="submit">&#128465;</button>
+                
+               </form></li>'); }?>
 
 
 
         <?php endforeach; ?>
 
+        
+
     </ul></div>
-<div class="col-md-6 map" ><div id="map"></div></div>
-<?php echo('<script>ymaps.ready(init);
+<div class="col-md-6">
+    <h3>Крепления</h3>
 
-function init() {
-       var location = ymaps.geolocation;
-    var myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 20
-        }, {
-            searchControlProvider: \'yandex#search\'
-        });
-        location.get({
-        mapStateAutoApply: true
-    })
-        .then(
-            function(result) {
-                // Получение местоположения пользователя.
-                var userAddress = result.geoObjects.get(0).properties.get(\'text\');
-                var userCoodinates = result.geoObjects.get(0).geometry.getCoordinates();
-                // Пропишем полученный адрес в балуне.
-                result.geoObjects.get(0).properties.set({
-                    balloonContentBody: \'Адрес: \' + userAddress +
-                        \'<br/>Координаты:\' + userCoodinates
-                });
-                myMap.geoObjects.add(result.geoObjects)
-            },
-            function(err) {
-                console.log(\'Ошибка: \' + err)
+
+    <?php $form = ActiveForm::begin([
+
+        'options' => ['class' => 'addForm'],
+    ]) ?>
+    <div class="parts">
+        <?= $form->field($krepleniemodel , 'name', [
+            'inputOptions' => [
+                'class' => 'coordname addinput',
+                'placeholder' =>'Наименование',
+
+            ]] ) ?>
+        <?= $form->field($krepleniemodel , 'price', [
+            'inputOptions' => [
+                'class' => 'hight addinput',
+                'placeholder' =>'Цена',
+
+            ]] ) ?>
+    </div>
+    <div class="parts">
+        <?= $form->field($krepleniemodel , 'rashod', [
+            'inputOptions' => [
+                'class' => 'width addinput',
+                'placeholder' =>'Расход',
+
+
+
+            ]] ) ?>
+        <div>
+            <?= Html::submitButton('Добавить', ['class' => 'coordbutton addButton','name'=>'addCoord']) ?>
+        </div>
+
+    </div>
+    <div class="parts">
+        <?= $form->field($krepleniemodel , 'description', [
+            'inputOptions' => [
+                'class' => 'width addinput',
+                'placeholder' =>'Описание',
+
+
+
+            ]] ) ?>
+
+    </div>
+
+
+
+
+
+
+
+    <?php ActiveForm::end() ?>
+
+
+
+
+
+
+
+    <?php
+
+    $coating = $query->orderBy('name')
+
+        ->all();
+    $kreplenie = $query3->orderBy('name')
+
+        ->all();
+
+
+    ?>
+    <ul>
+        <?php
+
+        foreach ($kreplenie as $coordinate):
+            if($coordinate->user_id==Yii::$app->user->identity->getId()){
+                echo('<li class="coordinate" id=/"coordinate_form_'.$coordinate->id.'/">
+            <form action="/web/index.php" method="post" name="'.$coordinate->id.'">
+            <input readonly name="id" type="text" value="'.$coordinate->id.'" class="coordid">
+            <input readonly name="coat" type="text" value="0" class="coordid">
+            <input  readonly  class="todelete" name="todelete" id="5'.$coordinate->id.'" type="text" value="1" class="todelete">
+            <div class="ppp">
+            Наименование:
+               <input name = "name" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->name.'" class="coordname togray"></div>
+                <div class="ppp">Описание:
+               <input name = "lenght" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->description.'" class="coordname togray"></div>
+               <div class="ppp">
+            Цена (руб):
+               <input name = "price" id="1'.$coordinate->id.'" readonly type="text" value="'.$coordinate->price.'" class="coordname togray"></div>
+               
+           
+               <div class="ppp">
+            Расход (шт/кв.м):
+                <input name = "width" id="3'.$coordinate->id.'"pattern="^[+-]?[0-9]{1,2}\.[0-9]{1,3}" readonly type="text" value="'.$coordinate->rashod.'" class="hight togray"></div>
+                
+                <button class= "coordbutton" name="addCoord" type="submit">&#128465;</button>
+                
+               </form></li>');
             }
-        );');
-foreach ($coordinates as $coordinate):
-    if($coordinate->username== Yii::$app->user->identity->username){
-echo ('
- var change=document.getElementById(7'.$coordinate->id.')
- 
 
-    $(change).click(function(){
-        var wid=document.getElementById(2'.$coordinate->id.').value;
-        var hig=document.getElementById(3'.$coordinate->id.').value;
-      
-        myMap.setCenter([hig,wid ], 4, {
-            checkZoomRange: true
-        });
+           ?>
 
 
-    });
 
-    
-        
-       
-
-    myMap.geoObjects
-        
-          .add(new ymaps.Placemark(['.$coordinate->hight.', '.$coordinate->width.'], {
-            balloonContent: \'<strong>'.$coordinate->coordname.'</strong>\'
-        }, {
-            preset: \'islands#icon\',
-            iconColor: \'#0095b6\'
-        }))
-     
-        ;
-');}endforeach;
-echo('}
- {
-
-};
-</script>');
-?>
-<?php
-foreach ($coordinates as $coordinate):
-if($coordinate->username== Yii::$app->user->identity->username){echo('<script>
-    var butt=document.getElementById(4'.$coordinate->id.');
-    
-   $(butt).click(function(){
-   var butt=document.getElementById(4'.$coordinate->id.');
-   var save=document.getElementById(8'.$coordinate->id.');
-   var todel=document.getElementById(5'.$coordinate->id.');
-    var coordname=document.getElementById(1'.$coordinate->id.');
-    var width=document.getElementById(2'.$coordinate->id.');
-    var del = document.getElementsByClassName("del");
-    var coord=document.getElementsByClassName("coord");
-   
-    var hight=document.getElementById(3'.$coordinate->id.');
-     var elements = document.getElementsByClassName("togray");
-     $(elements).prop(\'readonly\', true);
-     $(del).addClass(\'nodisp\');
-     $(coord).addClass(\'nodisp\');
-     $(elements).removeClass(\'green\');
-      $(save).removeClass(\'savebtn\');
-      $(todel).val(\'0\');
-     $(coordname).prop(\'readonly\', false);
-     $(width).prop(\'readonly\', false);
-     $(hight).prop(\'readonly\', false);
-     $(width).addClass(\'green\');
-      
-     $(hight).addClass(\'green\');
-     $(coordname).addClass(\'green\');
-     $(butt).addClass(\'savebtn\');
-      
-   
-        
+        <?php endforeach; ?>
 
 
-     
-   });
-</script>');};
 
-?>
-<?php endforeach;?>
+    </ul></div>
+
+
+
 
 

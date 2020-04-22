@@ -2,9 +2,8 @@
     height:470px;
 
 }
-.coordinate{list-style-type: none;width: 513px;}
-input{
-    width: 100px;}
+.coordinate{list-style-type: none;width: 513px; border: 4px double black}
+.qqqq{position: relative;}
 ul{padding:0px;}
 
 .coordid{display: none;}
@@ -18,17 +17,26 @@ ul{padding:0px;}
 .addForm{display: flex;}
 label{display: none;}
 .addinput{margin-right: 4px;}
-.addButton{width: 199px;}
+.addButton{width: 174px;}
 .logout:hover{border:2px solid #0bb308;}
-.logout{background-color: #e61400;
+.logout{background-color: #a52a2a;
     color: white;font-size: 13px;}
 
-.top-panel{background-color: #e61400;}
+.top-panel{background-color: brown;}
 .attrName{display: flex;}
 .attr{width: 104px;}
 
-.loginbtn{width:inherit; background-color: #e61400;color: white;border: none;
+.loginbtn{width:inherit; background-color: brown;color: white;border: none;
 }
-.signupbtn{width:300px; background-color: #e61400;color: white !important; text-align: center; padding:3px 108px 3px 108px;text-decoration: none !important; }
+.signupbtn{width:300px; background-color: brown;color: white !important; text-align: center; padding:3px 108px 3px 108px;text-decoration: none !important; }
 .nodisp{display: none;}
-.navbar-inverse .navbar-nav > .active > a{background-color: #e61400 }
+.navbar-inverse .navbar-nav > .active > a{background-color: brown;}
+.parts{width:200px;}
+.user_input{
+    width: 150px;}
+.togray{
+    width: -webkit-fill-available;}
+.ppp{width: 400px;}
+.namesup{margin-right: 96px;}
+.upper{display: inline-flex;}
+.namesup3{position: relative;right: 9px;}

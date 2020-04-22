@@ -7,11 +7,15 @@ class SignupForm extends Model{
 
     public $username;
     public $password;
+    public $name;
+    public $lastname;
+    public $phone;
+    public $companyname;
+    public $iscompany;
 
     public function rules() {
         return [
-            [['username', 'password'], 'required', 'message' => 'Заполните поле'],
-            ['username', 'unique', 'targetClass' => User::className(),  'message' => 'Этот логин уже занят'],
+            [['username', 'password','name','lastname','phone','companyname','iscompany'], 'required', 'message' => 'Заполните поле'],
         ];
     }
 
@@ -19,6 +23,13 @@ class SignupForm extends Model{
         return [
             'username' => 'Логин',
             'password' => 'Пароль',
+            'name' => 'Имя',
+            'lastname' => 'Фамилия',
+            'phone' => 'Телефон',
+            'companyname' => 'Название предприятия',
+            'role' => 'роль',
+            'iscompany' => 'Является предприятием',
+
         ];
     }
 
