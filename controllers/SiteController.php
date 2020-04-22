@@ -5,7 +5,7 @@ namespace app\controllers;
 
 use app\models\AddCoatingForm;
 use app\models\AddKreplenieForm;
-use app\models\coating;
+use app\models\Coating;
 use app\models\Kreplenie;
 use Yii;
 use yii\filters\AccessControl;
@@ -53,7 +53,7 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            
+
         ];
     }
 
@@ -66,7 +66,7 @@ class SiteController extends Controller
 
         $query3 = kreplenie::find();
         $krepleniemodel = new AddKreplenieForm();
-        $query = coating::find();
+        $query = Coating::find();
         $coatingmodel = new AddCoatingForm();
         if ($coatingmodel->load(\Yii::$app->request->post()) && $coatingmodel->validate()) {
             $coating= new coating();
